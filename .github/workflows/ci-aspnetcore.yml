@@ -15,11 +15,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Helm
         uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Lint aspnetcore Helm chart
         run: helm lint --strict ./charts/aspnetcore/
@@ -50,6 +50,8 @@ jobs:
 
       - name: Setup Helm
         uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Kubernetes ${{ matrix.kubernetesVersion }} Kind cluster
         uses: helm/kind-action@main
