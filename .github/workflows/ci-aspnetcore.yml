@@ -1,0 +1,102 @@
+name: ASP.NET Core chart CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "charts/aspnetcore/**"
+      - ".github/workflows/ci-aspnetcore.yml"
+
+jobs:
+  lint:
+    name: Lint Helm chart
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+
+      - name: Setup Helm
+        uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Lint aspnetcore Helm chart
+        run: helm lint --strict ./charts/aspnetcore/
+
+  # Inspired from https://github.com/kedacore/charts/blob/v2.9.4/.github/workflows/ci-core.yml
+  deploy:
+    name: Deploy to Kubernetes ${{ matrix.kubernetesVersion }}
+    runs-on: ubuntu-latest
+    needs: lint
+    strategy:
+      fail-fast: false
+      matrix:
+        # Images are defined on every Kind release, see: https://github.com/kubernetes-sigs/kind/releases
+        kubernetesVersion: [v1.26, v1.25, v1.24, v1.23]
+        include:
+          - kubernetesVersion: v1.26
+            kindImage: kindest/node:v1.26.0@sha256:691e24bd2417609db7e589e1a479b902d2e209892a10ce375fab60a8407c7352
+          - kubernetesVersion: v1.25
+            kindImage: kindest/node:v1.25.0@sha256:428aaa17ec82ccde0131cb2d1ca6547d13cf5fdabcc0bbecf749baa935387cbf
+          - kubernetesVersion: v1.24
+            kindImage: kindest/node:v1.24.0@sha256:406fd86d48eaf4c04c7280cd1d2ca1d61e7d0d61ddef0125cb097bc7b82ed6a1
+          - kubernetesVersion: v1.23
+            kindImage: kindest/node:v1.23.6@sha256:1af0f1bee4c3c0fe9b07de5e5d3fafeb2eec7b4e1b268ae89fcab96ec67e8355
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+
+      - name: Setup Helm
+        uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Kubernetes ${{ matrix.kubernetesVersion }} Kind cluster
+        uses: helm/kind-action@main
+        with:
+          node_image: ${{ matrix.kindImage }}
+
+      - name: Show Kubernetes version
+        run: kubectl version
+
+      - name: Show Kubernetes nodes
+        run: kubectl get nodes -o wide
+
+      - name: Show Helm version
+        run: helm version
+
+      - name: Generate test values
+        run: |
+          cat <<EOF > test-values.yaml
+          environment: Staging
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: "/"
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 3
+          EOF
+
+      - name: Create test namespace
+        run: kubectl create namespace test
+
+      - name: Template Helm chart
+        run: helm template aspnetcore ./charts/aspnetcore/ --namespace test --values test-values.yaml --debug
+
+      - name: Install Helm chart
+        run: helm install aspnetcore ./charts/aspnetcore/ --namespace test --values test-values.yaml --debug --wait
+
+      - name: Show Kubernetes resources
+        run: kubectl get all --namespace test
+        if: always()

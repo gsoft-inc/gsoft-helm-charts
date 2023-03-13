@@ -1,0 +1,18 @@
+{{- if .Values.aadPodIdentityBinding.create }}
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentityBinding
+metadata:
+  name: {{ default (printf "%s-aadPodIdentityBinding" .Release.Name) .Values.aadPodIdentityBinding.name }}
+  labels:
+    {{- include "aspnetcore.standardLabels" . | nindent 4 }}
+    {{- with .Values.commonLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  annotations:
+    {{- with .Values.commonAnnotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  azureIdentity: {{ .Values.aadPodIdentityBinding.identityName }}
+  selector: {{ .Values.aadPodIdentityBinding.identityName }}
+{{- end }}
