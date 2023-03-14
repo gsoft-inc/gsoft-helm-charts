@@ -39,7 +39,7 @@ aspnetcore:
 Finally, deploy your chart using the `--dependency-update` flag:
 
 ```bash
-helm upgrade --install --wait --debug --dependency-update [...more options] ./your-chart/
+helm upgrade --install --atomic --cleanup-on-fail --debug --dependency-update [...more options] ./your-chart/
 ```
 
 
