@@ -11,17 +11,17 @@ jobs:
   semgrep:
     runs-on: ubuntu-latest
     container:
-      image: returntocorp/semgrep@sha256:e0db2a8ba9eb59492c72008ef36bcdcc66ca04c783fabe6f10ad379f724cf9fb
+      image: returntocorp/semgrep@sha256:0c68b1e21a24ef4ad14927a64e5b0196be7b9cda65c422f15951a9f8f842726e
 
     steps:
       - name: Checkout all commits and tags
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
         if: ${{ github.event_name == 'pull_request' }}
         with:
           fetch-depth: 0
 
       - name: Checkout single commit
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
         if: ${{ github.event_name != 'pull_request' }}
 
       - name: Pull request scan
@@ -41,7 +41,7 @@ jobs:
 
       - name: Publish code scanning alerts
         if: ${{ github.event_name != 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@32dc499307d133bb5085bae78498c0ac2cf762d5 # v2
+        uses: github/codeql-action/upload-sarif@83f0fe6c4988d98a455712a27f0255212bba9bd4 # v2
         with:
           sarif_file: report.sarif
           category: semgrep
