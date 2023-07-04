@@ -10,6 +10,8 @@ on:
 jobs:
   semgrep:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
     container:
       image: returntocorp/semgrep@sha256:e0db2a8ba9eb59492c72008ef36bcdcc66ca04c783fabe6f10ad379f724cf9fb
 
