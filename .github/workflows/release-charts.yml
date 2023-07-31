@@ -31,7 +31,6 @@ jobs:
         uses: helm/chart-releaser-action@be16258da8010256c6e82849661221415f031968 # v1.5.0
         with:
           charts_dir: charts
-          token: ${{ secrets.HELM_PAT }}
         env:
           CR_TOKEN: "${{ secrets.HELM_PAT }}"
           CR_PAGES_BRANCH: "main"
