@@ -17,6 +17,20 @@ entries:
     version: 1.0.0
   aspnetcoretemp:
   - apiVersion: v2
+    created: "2023-07-31T21:42:34.996775841Z"
+    description: A temporary chart not to be used
+    digest: 403a11966c3a5c650b9a7213be18727e0c39b8addd6cb5bd8f5cb9270d8d3eeb
+    home: https://github.com/gsoft-inc/gsoft-helm-charts
+    maintainers:
+    - name: GSoft Group Inc.
+      url: https://www.gsoft.com
+    name: aspnetcoretemp
+    sources:
+    - https://github.com/gsoft-inc/gsoft-helm-charts
+    urls:
+    - https://github.com/gsoft-inc/gsoft-helm-charts/releases/download/aspnetcoretemp-0.0.9/aspnetcoretemp-0.0.9.tgz
+    version: 0.0.9
+  - apiVersion: v2
     created: "2023-07-31T21:28:53.96199299Z"
     description: A temporary chart not to be used
     digest: 180b2e4f3053c1f61e0a196982404f7784e22ffcbe6457acd0b0e4f8831def31
@@ -44,4 +58,4 @@ entries:
     urls:
     - https://github.com/gsoft-inc/gsoft-helm-charts/releases/download/aspnetcoretemp-0.0.7/aspnetcoretemp-0.0.7.tgz
     version: 0.0.7
-generated: "2023-07-31T21:28:53.96200049Z"
+generated: "2023-07-31T21:42:34.996785941Z"
