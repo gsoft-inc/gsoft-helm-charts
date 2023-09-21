@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
+        uses: actions/checkout@v3
 
       - name: Setup Helm
-        uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3
+        uses: azure/setup-helm@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -46,15 +46,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
+        uses: actions/checkout@v3
 
       - name: Setup Helm
-        uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3
+        uses: azure/setup-helm@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Kubernetes ${{ matrix.kubernetesVersion }} Kind cluster
-        uses: helm/kind-action@main
+        uses: helm/kind-action@dda0770415bac9fc20092cacbc54aa298604d140
         with:
           node_image: ${{ matrix.kindImage }}
 
