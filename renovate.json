@@ -24,8 +24,7 @@
     },
     {
       "matchManagers": ["github-actions"],
-      "groupName": "Pipeline dependencies",
-      "pinDigests": true
+      "groupName": "Pipeline dependencies"
     }
   ]
 }
