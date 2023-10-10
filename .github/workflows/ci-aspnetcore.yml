@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Kubernetes ${{ matrix.kubernetesVersion }} Kind cluster
-        uses: helm/kind-action@dda0770415bac9fc20092cacbc54aa298604d140 # v1
+        uses: helm/kind-action@9e8295d178de23cbfbd8fa16cf844eec1d773a07 # v1
         with:
           node_image: ${{ matrix.kindImage }}
 
