@@ -13,17 +13,17 @@ jobs:
     permissions:
       security-events: write
     container:
-      image: returntocorp/semgrep@sha256:0c68b1e21a24ef4ad14927a64e5b0196be7b9cda65c422f15951a9f8f842726e
+      image: returntocorp/semgrep@sha256:ed5809b8dc02d9e87d93018e1e7e9dbdcf592ecd4a0da1c35f8df786ca41a982
 
     steps:
       - name: Checkout all commits and tags
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
         if: ${{ github.event_name == 'pull_request' }}
         with:
           fetch-depth: 0
 
       - name: Checkout single commit
-        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
         if: ${{ github.event_name != 'pull_request' }}
 
       - name: Pull request scan
@@ -36,14 +36,14 @@ jobs:
 
       - name: Save report as pipeline artifact
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
         with:
           name: report.sarif
           path: report.sarif
 
       - name: Publish code scanning alerts
         if: ${{ github.event_name != 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@83f0fe6c4988d98a455712a27f0255212bba9bd4 # v2
+        uses: github/codeql-action/upload-sarif@fdcae64e1484d349b3366718cdfef3d404390e85 # v2
         with:
           sarif_file: report.sarif
           category: semgrep
