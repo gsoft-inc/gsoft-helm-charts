@@ -43,7 +43,7 @@ jobs:
 
       - name: Publish code scanning alerts
         if: ${{ github.event_name != 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@74483a38d39275f33fcff5f35b679b5ca4a26a99 # v2
+        uses: github/codeql-action/upload-sarif@66b90a5db151a8042fa97405c6cf843bbe433f7b # v2
         with:
           sarif_file: report.sarif
           category: semgrep
