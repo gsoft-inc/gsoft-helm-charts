@@ -13,7 +13,7 @@ jobs:
     permissions:
       security-events: write
     container:
-      image: returntocorp/semgrep@sha256:921f2b6dcfbf9bb2ebfd3a4b9736a067a713dceb40710cff9b80980aa8f40fa7
+      image: returntocorp/semgrep@sha256:fa8fe75399d1413ee1e2b1591d5cae02c9ccd69a39c58fa9d05f7df0fc999017
 
     steps:
       - name: Checkout all commits and tags
