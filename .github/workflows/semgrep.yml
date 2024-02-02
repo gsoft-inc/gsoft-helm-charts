@@ -13,7 +13,7 @@ jobs:
     permissions:
       security-events: write
     container:
-      image: returntocorp/semgrep@sha256:8295c189793172ae6a7e9f4592b6c43bd2c9172884cb320148f92e0753aefe98
+      image: returntocorp/semgrep@sha256:13aa15090e4f845b136cc889be9795be2771f35d18df99718852c7ff9f7caf97
 
     steps:
       - name: Checkout all commits and tags
@@ -36,14 +36,14 @@ jobs:
 
       - name: Save report as pipeline artifact
         if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@694cdabd8bdb0f10b2cea11669e1bf5453eed0a6 # v4
+        uses: actions/upload-artifact@26f96dfa697d77e81fd5907df203aa23a56210a8 # v4
         with:
           name: report.sarif
           path: report.sarif
 
       - name: Publish code scanning alerts
         if: ${{ github.event_name != 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@0b21cf2492b6b02c465a3e5d7c473717ad7721ba # v3
+        uses: github/codeql-action/upload-sarif@b7bf0a3ed3ecfa44160715d7c442788f65f0f923 # v3
         with:
           sarif_file: report.sarif
           category: semgrep
