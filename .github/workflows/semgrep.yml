@@ -2,48 +2,13 @@ name: Semgrep scan
 
 on:
   pull_request:
-    branches: [main]
+    branches: ["main"]
   workflow_dispatch: {}
   schedule:
     - cron: "32 7 * * 6"
 
 jobs:
-  semgrep:
-    runs-on: ubuntu-latest
+  call-workflow-semgrep:
     permissions:
       security-events: write
-    container:
-      image: returntocorp/semgrep@sha256:5a1d80730bd07e9ca9cbb9cd4505801732fd4c866dd9dfa8349803fc6f4ad623
-
-    steps:
-      - name: Checkout all commits and tags
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-        if: ${{ github.event_name == 'pull_request' }}
-        with:
-          fetch-depth: 0
-
-      - name: Checkout single commit
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-        if: ${{ github.event_name != 'pull_request' }}
-
-      - name: Pull request scan
-        if: ${{ github.event_name == 'pull_request' }}
-        run: semgrep scan --config=auto --verbose --time --error --baseline-commit ${{ github.event.pull_request.base.sha }}
-
-      - name: Full scan
-        if: ${{ github.event_name != 'pull_request' }}
-        run: semgrep scan --config=auto --verbose --time --sarif --output report.sarif
-
-      - name: Save report as pipeline artifact
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
-        with:
-          name: report.sarif
-          path: report.sarif
-
-      - name: Publish code scanning alerts
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@8a470fddafa5cbb6266ee11b37ef4d8aae19c571 # v3
-        with:
-          sarif_file: report.sarif
-          category: semgrep
+    uses: gsoft-inc/wl-reusable-workflows/.github/workflows/reusable-semgrep-workflow.yml@main
