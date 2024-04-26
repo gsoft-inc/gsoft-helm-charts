@@ -159,3 +159,8 @@ aadPodIdentityBinding:
 azureWorkloadIdentity:
   enabled: false
   clientId: ""
+
+## Pod Disruption Budget (https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets)
+## @param podDisruptionBudget.minAvailable  The description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod
+podDisruptionBudget:
+  minAvailable: 1
