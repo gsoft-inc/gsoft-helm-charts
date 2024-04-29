@@ -6,4 +6,4 @@ spec:
   minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}
+      {{- include "aspnetcore.selectorLabels" . | nindent 6 }}
