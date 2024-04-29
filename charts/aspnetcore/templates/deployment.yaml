@@ -36,7 +36,7 @@ spec:
     spec:
       serviceAccountName: {{ include "aspnetcore.serviceAccountName" . }}
       containers:
-        - name: {{ .Chart.Name }}
+        - name: {{ .Chart.Name }}-container
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
