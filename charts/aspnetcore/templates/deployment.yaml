@@ -35,10 +35,16 @@ spec:
       {{- end }}
     spec:
       serviceAccountName: {{ include "aspnetcore.serviceAccountName" . }}
+      {{- if .Values.volumes }}
+        {{- toYaml .Values.volumes | nindent 6 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-container
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.volumeMounts }}
+            {{- toYaml .Values.volumeMounts | nindent 10 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 8080
