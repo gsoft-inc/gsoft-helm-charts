@@ -164,3 +164,9 @@ azureWorkloadIdentity:
 ## @param podDisruptionBudget.minAvailable  The description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod
 podDisruptionBudget:
   minAvailable: 1
+
+## @param volumes Additional volumes to be mounted to the ASP.NET Core container
+##
+volumes: []
+
+volumeMounts: []
