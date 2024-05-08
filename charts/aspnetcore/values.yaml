@@ -165,10 +165,18 @@ azureWorkloadIdentity:
 podDisruptionBudget:
   minAvailable: 1
 
-## @param volumes Volumes to be mounted to the ASP.NET Core container
+## @param extraVolumes Optionally specify extra list of additional volumes, e.g:
+## extraVolumes:
+##   - name: config-vol
+##     emptyDir: {}
 ##
-volumes: []
+extraVolumes: []
 
-## @param volumeMount VolumeMount definitions for the mounted volumes
+## @param extraEnvVars Extra environment variables to be set on ASP.NET Core container, e.g:
+
+## @param extraVolumeMounts Optionally specify extra list of additional volumeMounts, e.g:
+## extraVolumeMounts:
+##   - name: config-vol
+##     mountPath: /etc/config
 ##
-volumeMounts: []
+extraVolumeMounts: []

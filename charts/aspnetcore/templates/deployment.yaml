@@ -42,9 +42,6 @@ spec:
         - name: {{ .Chart.Name }}-container
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.volumeMounts }}
-            {{- toYaml .Values.volumeMounts | nindent 10 }}
-          {{- end }}
           ports:
             - name: http
               containerPort: 8080
@@ -71,6 +68,9 @@ spec:
           startupProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.extraVolumeMounts }}
+          volumeMounts: {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -83,3 +83,6 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.extraVolumes}}
+      volumes: {{- toYaml .Values.extraVolume | nindent 8 }}
+      {{-end }}
