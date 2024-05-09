@@ -35,6 +35,9 @@ spec:
       {{- end }}
     spec:
       serviceAccountName: {{ include "aspnetcore.serviceAccountName" . }}
+      {{- if .Values.volumes }}
+        {{- toYaml .Values.volumes | nindent 6 }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-container
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -65,6 +68,10 @@ spec:
           startupProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .Values.extraVolumeMounts }}
+          volumeMounts:
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -76,4 +83,8 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.extraVolumes}}
+      volumes:
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
       {{- end }}

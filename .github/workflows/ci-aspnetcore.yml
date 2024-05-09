@@ -86,6 +86,12 @@ jobs:
             periodSeconds: 5
             timeoutSeconds: 5
             failureThreshold: 3
+          extraVolumes:
+            - name: configuration
+              emptyDir: {}
+          extraVolumeMounts:
+            - name: configuration
+              mountPath: /app/config
           EOF
 
       - name: Create test namespace
@@ -99,4 +105,8 @@ jobs:
 
       - name: Show Kubernetes resources
         run: kubectl get all --namespace test
+        if: always()
+
+      - name: Describe test pod
+        run: kubectl describe pods --namespace test
         if: always()

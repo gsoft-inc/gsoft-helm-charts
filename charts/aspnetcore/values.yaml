@@ -164,3 +164,19 @@ azureWorkloadIdentity:
 ## @param podDisruptionBudget.minAvailable  The description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod
 podDisruptionBudget:
   minAvailable: 1
+
+## @param extraVolumes Optionally specify extra list of additional volumes, e.g:
+## extraVolumes:
+##   - name: config-vol
+##     emptyDir: {}
+##
+extraVolumes: []
+
+## @param extraEnvVars Extra environment variables to be set on ASP.NET Core container, e.g:
+
+## @param extraVolumeMounts Optionally specify extra list of additional volumeMounts, e.g:
+## extraVolumeMounts:
+##   - name: config-vol
+##     mountPath: /etc/config
+##
+extraVolumeMounts: []
