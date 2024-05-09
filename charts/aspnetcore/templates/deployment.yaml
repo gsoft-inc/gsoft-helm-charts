@@ -69,7 +69,8 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- if .Values.extraVolumeMounts }}
-          volumeMounts: {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+          volumeMounts:
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
           {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -84,5 +85,6 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if .Values.extraVolumes}}
-      volumes: {{- toYaml .Values.extraVolume | nindent 8 }}
-      {{-end }}
+      volumes:
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+      {{- end }}
