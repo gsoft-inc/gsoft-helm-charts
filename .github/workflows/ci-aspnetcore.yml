@@ -86,12 +86,12 @@ jobs:
             periodSeconds: 5
             timeoutSeconds: 5
             failureThreshold: 3
-            extraVolumes:
-              - name: configuration
-                emptyDir: {}
-            extraVolumeMounts:
-              - name: configuration
-                mountPath: /app/config
+          extraVolumes:
+            - name: configuration
+              emptyDir: {}
+          extraVolumeMounts:
+            - name: configuration
+              mountPath: /app/config
           EOF
 
       - name: Create test namespace
