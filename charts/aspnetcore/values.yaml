@@ -185,7 +185,9 @@ extraVolumeMounts: []
 ## @param certificateStore.enabled Whether or not to replace the container's certificate store with Workleap's
 ## @param certificateStore.tenantId The id of the azure tenant the Key Vault containing the certificate store is located in
 ## @param certificateStore.keyvaultName The name of the Key Vault containing the certificate store
+## @param certificateStore.keyvaultObjectName The name of the object in the Key Vault containing the certificate
 certificateStore:
   enabled: false
   tenantId: ""
   keyvaultName: ""
+  keyvaultObjectName: ""
