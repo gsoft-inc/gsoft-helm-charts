@@ -67,9 +67,9 @@ spec:
           {{- end }}
           volumeMounts:
           {{- if .Values.certificateStore.enabled }}
-          - name: internal-certificates
+          - name: certificate-store
             mountPath: "/etc/ssl/certs/ca-certificates.crt"
-            subPath: "certificate-wildcard-platform-workleap-{{ .Values.environment }}-internal"
+            subPath: {{ quote .Values.certificateStore.fileName }}
             readOnly: true
           {{- end }}
           {{- if .Values.extraVolumeMounts }}
@@ -89,12 +89,16 @@ spec:
       {{- end }}
       volumes:
       {{- if .Values.certificateStore.enabled }}
-      - name: internal-certificates
+      - name: certificate-store
         csi:
-          driver: secrets-store.csi.k8s.io
-          readOnly: true
+          driver: file.csi.azure.com
           volumeAttributes:
-            secretProviderClass: internal-dns-keyvault
+            subscriptionID: {{ quote .Values.certificateStore.subscriptionId }}
+            resourceGroup: {{ quote .Values.certificateStore.resourceGroup }}
+            storageAccount: {{ quote .Values.certificateStore.storageAccount }}
+            shareName: {{ quote .Values.certificateStore.shareName }}
+            clientID: {{ quote .Values.azureWorkloadIdentity.clientId }}
+            mountOptions: "dir_mode=0777,file_mode=0777,cache=strict,actimeo=30,nosharesock"
       {{- end }}
       {{- if .Values.extraVolumes}}
         {{- toYaml .Values.extraVolumes | nindent 8 }}
