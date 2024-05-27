@@ -22,7 +22,7 @@ version: 1.0.0
 dependencies:
   - name: aspnetcore
     alias: aspnetcore
-    version: 1.0.0
+    version: 2.0.0
     repository: https://gsoft-inc.github.io/gsoft-helm-charts
 ```
 

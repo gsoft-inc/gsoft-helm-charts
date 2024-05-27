@@ -181,13 +181,17 @@ extraVolumes: []
 ##
 extraVolumeMounts: []
 
-## Replace the container's certificate store with Workleap's certificate store which is stored in an Azure Key Vault
+## Replace the container's certificate store with Workleap's certificate store which is stored in an Azure File Share
 ## @param certificateStore.enabled Whether or not to replace the container's certificate store with Workleap's
-## @param certificateStore.tenantId The id of the azure tenant the Key Vault containing the certificate store is located in
-## @param certificateStore.keyvaultName The name of the Key Vault containing the certificate store
-## @param certificateStore.keyvaultObjectName The name of the object in the Key Vault containing the certificate
+## @param certificateStore.subscriptionId The subscription ID of the share's storage account
+## @param certificateStore.resourceGroup The resource group of the share's storage account
+## @param certificateStore.storageAccount The name of the share's storage account
+## @param certificateStore.shareName The name of the share (usually always "certificates")
+## @param certificateStore.fileName The name of the file inside the share to mount as the certificate store in the container (usually always "ca-bundle.crt")
 certificateStore:
   enabled: false
-  tenantId: ""
-  keyvaultName: ""
-  keyvaultObjectName: ""
+  subscriptionId: ""
+  resourceGroup: ""
+  storageAccount: ""
+  shareName: "certificates"
+  fileName: "ca-bundle.crt"
