@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   aspnetcore:
   - apiVersion: v2
+    created: "2024-05-27T13:55:48.65013441Z"
+    description: A generic Helm chart for ASP.NET Core services
+    digest: 31b037626187ae77479b59bbbe162b20d61066c6680165a904175905a352f274
+    home: https://github.com/gsoft-inc/gsoft-helm-charts
+    maintainers:
+    - name: GSoft Group Inc.
+      url: https://www.gsoft.com
+    name: aspnetcore
+    sources:
+    - https://github.com/gsoft-inc/gsoft-helm-charts
+    urls:
+    - https://github.com/gsoft-inc/gsoft-helm-charts/releases/download/aspnetcore-2.0.0/aspnetcore-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
     created: "2024-05-15T20:35:47.29681995Z"
     description: A generic Helm chart for ASP.NET Core services
     digest: 30c7c82d86327b337a07af0099ba5f25568244a14c2999a7912a6e9d5bec65c1
@@ -85,4 +99,4 @@ entries:
     urls:
     - https://github.com/gsoft-inc/gsoft-helm-charts/releases/download/aspnetcore-1.0.0/aspnetcore-1.0.0.tgz
     version: 1.0.0
-generated: "2024-05-15T20:35:47.296860516Z"
+generated: "2024-05-27T13:55:48.650169034Z"
