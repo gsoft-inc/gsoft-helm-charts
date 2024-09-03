@@ -42,6 +42,7 @@ service:
 ## @param ingress.className IngressClass that will be be used to implement the Ingress
 ## @param ingress.hostname Default host for the ingress resource, a host pointing to this will be created
 ## @param ingress.path Default path for the ingress record
+## @param ingress.additionalPaths Additional paths pointing to the same service for the ingress record
 ## @param ingress.pathType Ingress path type
 ## @param ingress.annotations Additional annotations for the Ingress resource, for example nginx ingress annotations
 ## @param ingress.tls.enabled Enable TLS configuration for the host defined at `ingress.hostname` parameter
@@ -53,6 +54,7 @@ ingress:
   className: nginx
   hostname: aspnetcore.example.local
   path: /
+  additionalPaths: []
   pathType: Prefix
   annotations: {}
   tls:

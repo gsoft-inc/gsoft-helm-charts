@@ -34,4 +34,13 @@ spec:
                 name: {{ .Release.Name }}-service
                 port:
                   number: {{ .Values.service.port }}
+          {{- range .Values.ingress.additionalPaths }}
+          - path: {{ . }}
+            pathType: {{ $.Values.ingress.pathType }}
+            backend:
+              service:
+                name: {{ $.Release.Name }}-service
+                port:
+                  number: {{ $.Values.service.port }}
+          {{- end }}
 {{- end }}
