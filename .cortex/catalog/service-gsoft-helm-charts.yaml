@@ -8,7 +8,7 @@ info:
       alias: gsoft-inc
       repository: gsoft-inc/gsoft-helm-charts
   x-cortex-tag: service-gsoft-helm-charts
-  x-cortex-type: service
+  x-cortex-type: library
   x-cortex-slack:
     channels:
     - name: internal-dev-platform
@@ -19,6 +19,6 @@ info:
     provider: CORTEX
   x-cortex-link:
   - type: cortex
-    url: https://github.com/gsoft-inc/cortex-gitops/blob/main/.cortex/catalog/service-gsoft-helm-charts.yaml
+    url: https://github.com/gsoft-inc/gsoft-helm-charts/blob/main/.cortex/catalog/service-gsoft-helm-charts.yaml
     name: Edit current Cortex entity in GitHub
 
