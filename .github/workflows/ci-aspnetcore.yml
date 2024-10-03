@@ -24,6 +24,11 @@ jobs:
       - name: Lint aspnetcore Helm chart
         run: helm lint --strict ./charts/aspnetcore/
 
+      - name: Validate HELM chart
+        run: |
+          helm plugin install https://github.com/melmorabity/helm-kubeconform --version 0.6.7.1
+          helm kubeconform ./charts/aspnetcore/ --values ./charts/aspnetcore/values.yaml --strict
+
   # Inspired from https://github.com/kedacore/charts/blob/v2.9.4/.github/workflows/ci-core.yml
   deploy:
     name: Deploy to Kubernetes ${{ matrix.kubernetesVersion }}
