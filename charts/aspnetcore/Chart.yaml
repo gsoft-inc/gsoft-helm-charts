@@ -1,7 +1,7 @@
 apiVersion: v2
 name: aspnetcore
 description: A generic Helm chart for ASP.NET Core services
-version: 2.1.0
+version: 2.1.1
 home: https://github.com/gsoft-inc/gsoft-helm-charts
 sources:
   - https://github.com/gsoft-inc/gsoft-helm-charts
