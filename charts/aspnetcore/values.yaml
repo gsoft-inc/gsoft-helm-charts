@@ -1,6 +1,7 @@
 ## @param replicaCount Number of ASP.NET Core replicas to deploy
 ##
-replicaCount: 1
+## We set this to 2 by default because the PodDisruptionBudget is set to minimum 1 running replica and having only one replica creates a deadlock while draining nodes during cluster upgrades
+replicaCount: 2
 
 ## @param environment The ASP.NET Core environment name (DOTNET_ENVIRONMENT)
 ##
