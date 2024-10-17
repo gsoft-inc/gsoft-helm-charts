@@ -3,6 +3,9 @@
 ## We set this to 2 by default because the PodDisruptionBudget is set to minimum 1 running replica and having only one replica creates a deadlock while draining nodes during cluster upgrades
 replicaCount: 2
 
+## @param service.terminationGracePeriodSeconds The duration in seconds the pod needs to terminate gracefully
+terminationGracePeriodSeconds: 30
+
 ## @param environment The ASP.NET Core environment name (DOTNET_ENVIRONMENT)
 ##
 environment: Development
@@ -31,7 +34,6 @@ image:
 ## @param service.name Name of the service, automatically generated from the release name if not specified
 ## @param service.port ASP.NET Core service HTTP port
 ## @param service.annotations Additional custom annotations for ASP.NET Core service
-##
 service:
   name: ""
   port: 80

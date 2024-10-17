@@ -35,6 +35,7 @@ spec:
       {{- end }}
     spec:
       serviceAccountName: {{ include "aspnetcore.serviceAccountName" . }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
         - name: {{ .Chart.Name }}-container
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
