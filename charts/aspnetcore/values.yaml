@@ -66,19 +66,9 @@ ingress:
 
 ## ASP.NET Core deployment parameters
 ## @param deployment.name Name of the deployment, automatically generated from the release name if not specified
-## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
-## @param deployment.autoscaling.enabled Default to false. Enable autoscaling
-## @param deployment.autoscaling.minReplicas Optional if PodDistributionBudget is set. Minimum number of ASP.NET Core replicas minimum is PodDisruptionBudget.minAvailable + 1
-## @param deployment.autoscaling.maxReplicas Optional if PodDistributionBudget is set or minReplicas is set. Maximum number of ASP.NET Core replicas minimum is minReplicas value.
-## @param deployment.autoscaling.targetCPUUtilizationPercentage Target CPU utilization percentage for autoscaling
 ##
 deployment:
   name: ""
-  autoscaling:
-    enabled: false
-    #minReplicas: 2
-    #maxReplicas: 3
-    targetCPUUtilizationPercentage: 80
 
 ## ASP.NET Core containers' resource requests and limits defined in YAML
 ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
@@ -179,6 +169,19 @@ azureWorkloadIdentity:
 ## @param podDisruptionBudget.minAvailable  The description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod
 podDisruptionBudget:
   minAvailable: 1
+
+## Autoscaling deployment settings
+## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+## @param autoscaling.enabled Default to false. Enable autoscaling
+## @param autoscaling.minReplicas Optional if PodDistributionBudget is set. Minimum number of ASP.NET Core replicas minimum is PodDisruptionBudget.minAvailable + 1
+## @param autoscaling.maxReplicas Optional if PodDistributionBudget is set or minReplicas is set. Maximum number of ASP.NET Core replicas minimum is minReplicas value.
+## @param autoscaling.targetCPUUtilizationPercentage Target CPU utilization percentage for autoscaling
+autoscaling:
+  enabled: false
+  name: ""
+  minReplicas: 2
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
 
 ## @param extraVolumes Optionally specify extra list of additional volumes, e.g:
 ## extraVolumes:
