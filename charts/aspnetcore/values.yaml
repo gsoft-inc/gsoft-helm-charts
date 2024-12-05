@@ -75,7 +75,7 @@ ingress:
 deployment:
   name: ""
   autoscaling:
-    enabled: true
+    enabled: false
     #minReplicas: 2
     #maxReplicas: 3
     targetCPUUtilizationPercentage: 80
