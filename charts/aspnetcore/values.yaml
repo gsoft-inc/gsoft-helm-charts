@@ -170,6 +170,19 @@ azureWorkloadIdentity:
 podDisruptionBudget:
   minAvailable: 1
 
+## Autoscaling deployment settings
+## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+## @param autoscaling.enabled Default to false. Enable autoscaling
+## @param autoscaling.minReplicas Optional if PodDistributionBudget is set. Minimum number of ASP.NET Core replicas minimum is PodDisruptionBudget.minAvailable + 1
+## @param autoscaling.maxReplicas Optional if PodDistributionBudget is set or minReplicas is set. Maximum number of ASP.NET Core replicas minimum is minReplicas value.
+## @param autoscaling.targetCPUUtilizationPercentage Target CPU utilization percentage for autoscaling
+autoscaling:
+  enabled: true
+  name: ""
+  minReplicas: 2
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
 ## @param extraVolumes Optionally specify extra list of additional volumes, e.g:
 ## extraVolumes:
 ##   - name: config-vol

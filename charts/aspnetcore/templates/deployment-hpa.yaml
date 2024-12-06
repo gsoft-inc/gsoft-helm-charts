@@ -1,0 +1,29 @@
+{{- if ((.Values.autoscaling).enabled) }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ default (printf "%s-hpa" .Release.Name) .Values.autoscaling.name }}
+  labels:
+    {{- include "aspnetcore.standardLabels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+      {{- toYaml .Values.commonLabels | nindent 4 }}
+    {{- end }}
+  annotations:
+    {{- with .Values.commonAnnotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage }}
+          type: Utilization
+      type: Resource
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ default (printf "%s-deployment" .Release.Name) .Values.deployment.name }}
+{{- end }}
