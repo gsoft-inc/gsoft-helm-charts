@@ -177,7 +177,7 @@ podDisruptionBudget:
 ## @param autoscaling.maxReplicas Optional if PodDistributionBudget is set or minReplicas is set. Maximum number of ASP.NET Core replicas minimum is minReplicas value.
 ## @param autoscaling.targetCPUUtilizationPercentage Target CPU utilization percentage for autoscaling
 autoscaling:
-  enabled: false
+  enabled: true
   name: ""
   minReplicas: 2
   maxReplicas: 3
