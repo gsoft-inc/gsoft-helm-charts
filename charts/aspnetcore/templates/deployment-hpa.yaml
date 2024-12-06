@@ -2,7 +2,7 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ default (printf "%s-deployment" .Release.Name) .Values.autoscaling.name }}
+  name: {{ default (printf "%s-hpa" .Release.Name) .Values.autoscaling.name }}
   labels:
     {{- include "aspnetcore.standardLabels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
