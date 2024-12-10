@@ -199,17 +199,11 @@ extraVolumes: []
 ##
 extraVolumeMounts: []
 
-## Replace the container's certificate store with Workleap's certificate store which is stored in an Azure File Share
+## Replace the container's certificate store with Workleap's certificate store which is stored in a ConfigMap created by trust-manager
 ## @param certificateStore.enabled Whether or not to replace the container's certificate store with Workleap's
-## @param certificateStore.subscriptionId The subscription ID of the share's storage account
-## @param certificateStore.resourceGroup The resource group of the share's storage account
-## @param certificateStore.storageAccount The name of the share's storage account
-## @param certificateStore.shareName The name of the share (usually always "certificates")
-## @param certificateStore.fileName The name of the file inside the share to mount as the certificate store in the container (usually always "ca-bundle.crt")
+## @param certificateStore.configMapName The name of the ConfigMap containing the certificate store (usually always "workleap-trust-bundle")
+## @param certificateStore.fileName The name of the file inside the ConfigMap to mount as the certificate store in the container (usually always "ca-certificates.crt")
 certificateStore:
   enabled: false
-  subscriptionId: ""
-  resourceGroup: ""
-  storageAccount: ""
-  shareName: "certificates"
-  fileName: "ca-bundle.crt"
+  configMapName: "workleap-trust-bundle"
+  fileName: "ca-certificates.crt"

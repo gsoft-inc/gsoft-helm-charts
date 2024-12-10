@@ -91,15 +91,13 @@ spec:
       volumes:
       {{- if .Values.certificateStore.enabled }}
       - name: certificate-store
-        csi:
-          driver: file.csi.azure.com
-          volumeAttributes:
-            subscriptionID: {{ quote .Values.certificateStore.subscriptionId }}
-            resourceGroup: {{ quote .Values.certificateStore.resourceGroup }}
-            storageAccount: {{ quote .Values.certificateStore.storageAccount }}
-            shareName: {{ quote .Values.certificateStore.shareName }}
-            clientID: {{ quote .Values.azureWorkloadIdentity.clientId }}
-            mountOptions: "dir_mode=0777,file_mode=0777,cache=strict,actimeo=30,nosharesock"
+        configMap:
+          name: {{ .Values.certificateStore.configMapName }}
+          defaultMode: 0644
+          optional: false
+          items:
+          - key: {{ .Values.certificateStore.fileName }}
+            item: {{ .Values.certificateStore.fileName }}
       {{- end }}
       {{- if .Values.extraVolumes}}
         {{- toYaml .Values.extraVolumes | nindent 8 }}
