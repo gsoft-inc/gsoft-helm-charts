@@ -97,7 +97,7 @@ spec:
           optional: false
           items:
           - key: {{ .Values.certificateStore.fileName }}
-            item: {{ .Values.certificateStore.fileName }}
+            path: {{ .Values.certificateStore.fileName }}
       {{- end }}
       {{- if .Values.extraVolumes}}
         {{- toYaml .Values.extraVolumes | nindent 8 }}
