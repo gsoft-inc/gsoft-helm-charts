@@ -91,6 +91,14 @@ resources:
 ##
 readinessProbe: {}
 
+## @param lifecycle Optional YAML definition of the lifecycle, e.g:
+# lifecycle:
+#   preStop:
+#     exec:
+#       command: ["sleep", "90"]
+##
+lifecycle: {}
+
 ## @param livenessProbe Optional YAML definition of the livenessProbe, e.g:
 # livenessProbe:
 #   httpGet:
@@ -207,3 +215,18 @@ certificateStore:
   enabled: false
   configMapName: "workleap-trust-bundle"
   fileName: "ca-certificates.crt"
+
+
+## Configure Linux kernel security parameters. The config below is ONLY suitable for services interacting with MongoDB Atlas.
+## ref: https://www.mongodb.com/docs/manual/faq/diagnostics/#does-tcp-keepalive-time-affect-mongodb-deployments
+## @param securityContext.enabled Enable security context
+## @param securityContext.sysctls List of sysctls to set in the container
+securityContext:
+  enabled: true
+  sysctls:
+  - name: net.ipv4.tcp_keepalive_time
+    value: "120"
+  - name: net.ipv4.tcp_keepalive_intvl
+    value: "30"
+  - name: net.ipv4.tcp_keepalive_probes
+    value: "8"
