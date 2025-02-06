@@ -52,7 +52,7 @@ service:
 ## @param ingress.tls.secretName The TLS secret name containing the TLS certificate for the `ingress.hostname` host
 ##
 ingress:
-  create: true
+  create: false
   name: ""
   className: nginx
   hostname: aspnetcore.example.local
