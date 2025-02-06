@@ -37,7 +37,7 @@ spec:
       {{- if .Values.securityContext.enabled }}
       securityContext:
         sysctls:
-          {{- toYaml .Values.securityContext.sysctls | nindent 10 }}
+          {{ toYaml .Values.securityContext.sysctls | nindent 10 }}
       {{- end }}
       serviceAccountName: {{ include "aspnetcore.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
