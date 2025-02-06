@@ -92,7 +92,7 @@ jobs:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: "/"
+              path: "/health"
               port: http
             initialDelaySeconds: 5
             periodSeconds: 5
