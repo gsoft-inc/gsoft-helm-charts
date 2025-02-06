@@ -222,7 +222,7 @@ certificateStore:
 ## @param securityContext.enabled Enable security context
 ## @param securityContext.sysctls List of sysctls to set in the container
 securityContext:
-  enabled: true
+  enabled: false
   sysctls:
   - name: net.ipv4.tcp_keepalive_time
     value: "120"
