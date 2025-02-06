@@ -68,6 +68,7 @@ jobs:
       - name: Create Kubernetes ${{ matrix.kubernetesVersion }} Kind cluster
         uses: helm/kind-action@a1b0e391336a6ee6713a0583f8c6240d70863de3 # v1
         with:
+          config: ./tests/kind-config.yaml
           node_image: ${{ matrix.kindImage }}
 
       - name: Show Kubernetes version
@@ -92,7 +93,7 @@ jobs:
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: "/"
+              path: "/health"
               port: http
             initialDelaySeconds: 5
             periodSeconds: 5
