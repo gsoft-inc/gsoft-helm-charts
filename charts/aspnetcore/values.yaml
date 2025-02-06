@@ -52,7 +52,7 @@ service:
 ## @param ingress.tls.secretName The TLS secret name containing the TLS certificate for the `ingress.hostname` host
 ##
 ingress:
-  create: false
+  create: true
   name: ""
   className: nginx
   hostname: aspnetcore.example.local
@@ -222,7 +222,7 @@ certificateStore:
 ## @param securityContext.enabled Enable security context
 ## @param securityContext.sysctls List of sysctls to set in the container
 securityContext:
-  enabled: true
+  enabled: false
   sysctls:
   - name: net.ipv4.tcp_keepalive_time
     value: "120"
