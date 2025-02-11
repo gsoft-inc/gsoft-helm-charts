@@ -5,11 +5,11 @@ metadata:
   labels:
     {{- include "aspnetcore.standardLabels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
-    {{ toYaml .Values.commonLabels | nindent 4 }}
+      {{- toYaml .Values.commonLabels | nindent 4 }}
     {{- end }}
   annotations:
     {{- with .Values.commonAnnotations }}
-    {{ toYaml . | nindent 4 }}
+      {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -21,7 +21,7 @@ spec:
       labels:
         {{- include "aspnetcore.selectorLabels" . | nindent 8 }}
         {{- if .Values.podLabels }}
-        {{ toYaml .Values.podLabels | nindent 8 }}
+          {{- toYaml .Values.podLabels | nindent 8 }}
         {{- end }}
         {{- if .Values.aadPodIdentityBinding.create }}
         aadpodidbinding: {{ .Values.aadPodIdentityBinding.identityName }}
@@ -37,8 +37,8 @@ spec:
       {{- if .Values.securityContext.enabled }}
       securityContext:
         sysctls:
-          {{ toYaml .Values.securityContext.sysctls | nindent 10 }}
-      {{- end }}
+          {{- toYaml .Values.securityContext.sysctls | nindent 10 }}
+      {{- end }}   
       serviceAccountName: {{ include "aspnetcore.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
@@ -54,8 +54,8 @@ spec:
             - name: ASPNETCORE_URLS
               value: "http://+:8080"
           {{- range .Values.extraEnvVars }}
-          - name: {{ .name }}
-            value: {{ .value | quote }}
+            - name: {{ .name }}
+              value: {{ .value | quote }}
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
@@ -76,15 +76,15 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           volumeMounts:
-            {{- if .Values.certificateStore.enabled }}
-            - name: certificate-store
-              mountPath: "/etc/ssl/certs/ca-certificates.crt"
-              subPath: {{ quote .Values.certificateStore.fileName }}
-              readOnly: true
-            {{- end }}
-            {{- if .Values.extraVolumeMounts }}
-            {{ toYaml .Values.extraVolumeMounts | nindent 12 }}
-            {{- end }}
+          {{- if .Values.certificateStore.enabled }}
+          - name: certificate-store
+            mountPath: "/etc/ssl/certs/ca-certificates.crt"
+            subPath: {{ quote .Values.certificateStore.fileName }}
+            readOnly: true
+          {{- end }}
+          {{- if .Values.extraVolumeMounts }}
+            {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -98,16 +98,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-        {{- if .Values.certificateStore.enabled }}
-        - name: certificate-store
-          configMap:
-            name: {{ .Values.certificateStore.configMapName }}
-            defaultMode: 0644
-            optional: false
-            items:
-              - key: {{ .Values.certificateStore.fileName }}
-                path: {{ .Values.certificateStore.fileName }}
-        {{- end }}
-        {{- if .Values.extraVolumes }}
-        {{ toYaml .Values.extraVolumes | nindent 8 }}
-        {{- end }}
+      {{- if .Values.certificateStore.enabled }}
+      - name: certificate-store
+        configMap:
+          name: {{ .Values.certificateStore.configMapName }}
+          defaultMode: 0644
+          optional: false
+          items:
+          - key: {{ .Values.certificateStore.fileName }}
+            item: {{ .Values.certificateStore.fileName }}
+            path: {{ .Values.certificateStore.fileName }}
+      {{- end }}
+      {{- if .Values.extraVolumes}}
+        {{- toYaml .Values.extraVolumes | nindent 8 }}
+      {{- end }}
