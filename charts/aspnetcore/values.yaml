@@ -92,12 +92,12 @@ resources:
 readinessProbe: {}
 
 ## @param lifecycle Optional YAML definition of the lifecycle, e.g:
-# lifecycle:
+# lifecycle: |
 #   preStop:
 #     exec:
 #       command: ["sleep", "90"]
 ##
-lifecycle: {}
+lifecycle: ""
 
 ## @param livenessProbe Optional YAML definition of the livenessProbe, e.g:
 # livenessProbe:
