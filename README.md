@@ -1,4 +1,4 @@
-# GSoft generic Helm charts
+# Workleap generic Helm charts
 
 This repository contains generic Helm charts available through GitHub Pages.
 
