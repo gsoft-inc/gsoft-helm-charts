@@ -23,7 +23,7 @@ dependencies:
   - name: aspnetcore
     alias: aspnetcore
     version: 2.0.0
-    repository: https://gsoft-inc.github.io/gsoft-helm-charts
+    repository: https://workleap.github.io/gsoft-helm-charts
 ```
 
 Then, in your `values.yaml` file, override the default values:
@@ -50,7 +50,7 @@ helm upgrade --install --atomic --cleanup-on-fail --debug --dependency-update [.
 * Create a pull request and go through the review process.
 * When the pull request is merged back in the main branch, the following workflows are automatically triggered:
   1. [Release charts](.github/workflows/release-charts.yml): packages the updated chart, creates a GitHub release and updates the public Helm [index.yaml](pages/index.yaml) repository file. This has no effect if no chart version was changed.
-  2. [Deploy pages](.github/workflows/deploy-pages.yml): deploy the latest [index.yaml](https://gsoft-inc.github.io/gsoft-helm-charts/index.yaml) file to GitHub Pages.
+  2. [Deploy pages](.github/workflows/deploy-pages.yml): deploy the latest [index.yaml](https://workleap.github.io/gsoft-helm-charts/index.yaml) file to GitHub Pages.
 
 
 ## License
