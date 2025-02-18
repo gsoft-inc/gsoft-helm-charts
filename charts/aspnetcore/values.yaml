@@ -47,6 +47,8 @@ service:
 ## @param ingress.path Default path for the ingress record
 ## @param ingress.additionalPaths Additional paths pointing to the same service for the ingress record
 ## @param ingress.pathType Ingress path type
+## Use pathType: Prefix if the paths contains only alphanumerical and "/" characters.
+## Use pathType: ImplementationSpecific if the path contains REGEX.
 ## @param ingress.annotations Additional annotations for the Ingress resource, for example nginx ingress annotations
 ## @param ingress.tls.enabled Enable TLS configuration for the host defined at `ingress.hostname` parameter
 ## @param ingress.tls.secretName The TLS secret name containing the TLS certificate for the `ingress.hostname` host
