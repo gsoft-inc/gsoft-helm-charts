@@ -22,4 +22,8 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "aspnetcore.selectorLabels" . | nindent 4 }}
+    {{- if .Values.customSelectors }}
+    {{ toYaml .Values.customSelectors | nindent 4 }}
+    {{- else }}
+    {{ include "aspnetcore.selectorLabels" . | nindent 4 }}
+    {{- end }}
