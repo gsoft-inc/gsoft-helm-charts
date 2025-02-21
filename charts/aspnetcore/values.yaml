@@ -232,3 +232,11 @@ securityContext:
     value: "30"
   - name: net.ipv4.tcp_keepalive_probes
     value: "8"
+
+## Configure settings related to HELM chart migration.
+## @param migration.existingSelectors.enabled Whether or not to use existing selectors for the deployment
+## @param migration.existingSelectors.selectors A map of existing selectors to use for the deployment
+migration:
+  existingSelectors:
+    enabled: false
+    selectors: {}
