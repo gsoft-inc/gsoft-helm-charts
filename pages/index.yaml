@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   aspnetcore:
   - apiVersion: v2
+    created: "2025-02-24T12:40:52.351224603Z"
+    description: A generic Helm chart for ASP.NET Core services
+    digest: 2a6f0dbb559c232bfaea4f7176fbd7a69481db1b3f3535ca9941ce2e225584c6
+    home: https://github.com/workleap/gsoft-helm-charts
+    maintainers:
+    - name: Workleap
+      url: https://www.workleap.com
+    name: aspnetcore
+    sources:
+    - https://github.com/workleap/gsoft-helm-charts
+    urls:
+    - https://github.com/workleap/gsoft-helm-charts/releases/download/aspnetcore-3.0.4/aspnetcore-3.0.4.tgz
+    version: 3.0.4
+  - apiVersion: v2
     created: "2025-02-18T20:40:10.735128325Z"
     description: A generic Helm chart for ASP.NET Core services
     digest: 6ba5eb2784c807a1d4a3476469cf8f5a1fa32ad0cc2713fbb5a0e209b70849bb
@@ -211,4 +225,4 @@ entries:
     urls:
     - https://github.com/workleap/gsoft-helm-charts/releases/download/aspnetcore-1.0.0/aspnetcore-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-18T20:40:10.735232369Z"
+generated: "2025-02-24T12:40:52.351339969Z"
