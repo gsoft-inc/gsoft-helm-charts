@@ -6,4 +6,8 @@ spec:
   minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
   selector:
     matchLabels:
-      {{- include "aspnetcore.selectorLabels" . | nindent 6 }}
+      {{- if .Values.migration.existingSelectors.enabled }}
+        {{- toYaml .Values.migration.existingSelectors.selectors | nindent 6 }}
+      {{- else }}
+        {{ include "aspnetcore.selectorLabels" . | nindent 6 }}
+      {{- end }}

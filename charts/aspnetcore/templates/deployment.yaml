@@ -23,7 +23,11 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "aspnetcore.selectorLabels" . | nindent 8 }}
+        {{- if .Values.migration.existingSelectors.enabled }}
+          {{- toYaml .Values.migration.existingSelectors.selectors | nindent 8 }}
+        {{- else }}
+          {{ include "aspnetcore.selectorLabels" . | nindent 8 }}
+        {{- end }}
         {{- if .Values.podLabels }}
           {{- toYaml .Values.podLabels | nindent 8 }}
         {{- end }}
